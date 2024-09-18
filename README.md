@@ -28,7 +28,7 @@ The VPN Admin Panel offers a central hub for VPN service providers to manage the
 ## Installation
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/vpn-admin-panel.git
+    git clone https://github.com/sameededitz/tom-vpn
     ```
 2. **Navigate to the project directory**:
     ```bash
