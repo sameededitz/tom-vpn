@@ -281,4 +281,41 @@ class OptionController extends Controller
             'message' => 'Ads saved successfully',
         ]);
     }
+
+    public function getAd()
+    {
+        $options = Option::whereIn('key', [
+            'ad_img_1',
+            'ad_link_1',
+            'ad_time_1',
+            'ad_img_2',
+            'ad_link_2',
+            'ad_img_3',
+            'ad_link_3',
+        ])->get()->keyBy('key');
+
+        $ad_img_1_url = isset($options['ad_img_1'])
+            ? $options['ad_img_1']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_1 = $options['ad_link_1']->value ?? '';
+        $ad_time_1 = $options['ad_time_1']->value ?? '';
+        $ad_img_2_url = isset($options['ad_img_2'])
+            ? $options['ad_img_2']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_2 = $options['ad_link_2']->value ?? '';
+        $ad_img_3_url = isset($options['ad_img_3'])
+            ? $options['ad_img_3']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_3 = $options['ad_link_3']->value ?? '';
+
+        return response()->json([
+            'ad_img_1_url' => $ad_img_1_url,
+            'ad_link_1' => $ad_link_1,
+            'ad_time_1' => $ad_time_1,
+            'ad_img_2_url' => $ad_img_2_url,
+            'ad_link_2' => $ad_link_2,
+            'ad_img_3_url' => $ad_img_3_url,
+            'ad_link_3' => $ad_link_3,
+        ]);
+    }
 }

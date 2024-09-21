@@ -38,3 +38,5 @@ Route::get('/plans', [UserController::class, 'plans'])->name('api.all.plans');
 Route::get('/servers', [ServerController::class, 'index'])->name('api.all.servers');
 
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');
+
+Route::get('/ads', [OptionController::class, 'getAd'])->name('api.ads');
