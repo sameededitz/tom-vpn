@@ -50,6 +50,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'verifyR
     Route::post('/info/save', [OptionController::class, 'saveInfo'])->name('save-info');
     Route::post('/options/save', [OptionController::class, 'saveOptions'])->name('save-options');
 
+    Route::get('/ad/manage', [OptionController::class, 'ad'])->name('all-ads');
+    Route::post('/ad/save', [OptionController::class, 'saveAd'])->name('save-ad');
+
     Route::get('/adminUsers', [AdminController::class, 'allAdmins'])->name('all-admins');
 
     Route::get('/signup', [AdminController::class, 'addAdmin'])->name('add-admin');

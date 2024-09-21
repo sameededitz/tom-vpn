@@ -61,6 +61,12 @@
                     <span>TOS & Privacy</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('all-ads') }}">
+                    <iconify-icon icon="icon-park-outline:ad" class="menu-icon"></iconify-icon>
+                    <span>Advertisement</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

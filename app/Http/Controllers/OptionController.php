@@ -170,4 +170,115 @@ class OptionController extends Controller
             'ad_img_url' => $ad_img_url
         ]);
     }
+
+    public function ad()
+    {
+        $options = Option::whereIn('key', [
+            'ad_img_1',
+            'ad_link_1',
+            'ad_time_1',
+            'ad_img_2',
+            'ad_link_2',
+            'ad_img_3',
+            'ad_link_3',
+        ])->get()->keyBy('key');
+
+        $ad_img_1_url = isset($options['ad_img_1'])
+            ? $options['ad_img_1']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_1 = $options['ad_link_1']->value ?? '';
+        $ad_time_1 = $options['ad_time_1']->value ?? '';
+
+        $ad_img_2_url = isset($options['ad_img_2'])
+            ? $options['ad_img_2']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_2 = $options['ad_link_2']->value ?? '';
+
+        $ad_img_3_url = isset($options['ad_img_3'])
+            ? $options['ad_img_3']->getFirstMediaUrl('info_img')
+            : null;
+        $ad_link_3 = $options['ad_link_3']->value ?? '';
+
+        return view('admin.ad-settings', compact(
+            'ad_img_1_url',
+            'ad_link_1',
+            'ad_time_1',
+            'ad_img_2_url',
+            'ad_link_2',
+            'ad_img_3_url',
+            'ad_link_3'
+        ));
+    }
+
+    public function saveAd(Request $request)
+    {
+        $request->validate([
+            'ad_img_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+            'ad_link_1' => 'required|string|max:255',
+            'ad_time_1' => 'required',
+            'ad_img_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+            'ad_link_2' => 'required|string|max:255',
+            'ad_img_3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+            'ad_link_3' => 'required|string|max:255',
+        ]);
+
+        Option::updateOrCreate(
+            ['key' => 'ad_link_1'],
+            ['value' => $request->input('ad_link_1')]
+        );
+        Option::updateOrCreate(
+            ['key' => 'ad_time_1'],
+            ['value' => $request->input('ad_time_1')]
+        );
+        Option::updateOrCreate(
+            ['key' => 'ad_link_2'],
+            ['value' => $request->input('ad_link_2')]
+        );
+        Option::updateOrCreate(
+            ['key' => 'ad_link_3'],
+            ['value' => $request->input('ad_link_3')]
+        );
+        if ($request->hasFile('ad_img_1')) {
+            $ad_img_1 = $request->file('ad_img_1');
+            $option1 = Option::updateOrCreate(
+                ['key' => 'ad_img_1'],
+                ['value' => 'ad_img_1']  // Or any other relevant value to store
+            );
+
+            // Clear previous media and add new image
+            $option1->clearMediaCollection('info_img');
+            $option1->addMedia($ad_img_1)->toMediaCollection('info_img');
+        }
+
+        // Handling ad_img_2
+        if ($request->hasFile('ad_img_2')) {
+            $ad_img_2 = $request->file('ad_img_2');
+            $option2 = Option::updateOrCreate(
+                ['key' => 'ad_img_2'],
+                ['value' => 'ad_img_2']  // Or any other relevant value to store
+            );
+
+            // Clear previous media and add new image
+            $option2->clearMediaCollection('info_img');
+            $option2->addMedia($ad_img_2)->toMediaCollection('info_img');
+        }
+
+        // Handling ad_img_3
+        if ($request->hasFile('ad_img_3')) {
+            $ad_img_3 = $request->file('ad_img_3');
+            $option3 = Option::updateOrCreate(
+                ['key' => 'ad_img_3'],
+                ['value' => 'ad_img_3']
+            );
+
+            // Clear previous media and add new image
+            $option3->clearMediaCollection('info_img');
+            $option3->addMedia($ad_img_3)->toMediaCollection('info_img');
+        }
+
+        return redirect()->back()->with([
+            'status' => 'success',
+            'message' => 'Ads saved successfully',
+        ]);
+    }
 }
