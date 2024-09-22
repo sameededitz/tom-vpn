@@ -36,7 +36,7 @@ class AuthController extends Controller
             'referred_by' => User::where('referral_code', $request->referral_code)->first()->id ?? null,
         ]);
 
-        $user->sendEmailVerificationNotification();
+        $user->sendWelcomeEmail();
 
         if ($request->has('referral_code')) {
             $referrer = User::where('referral_code', $request->referral_code)->first();
