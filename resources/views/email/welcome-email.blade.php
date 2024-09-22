@@ -665,19 +665,6 @@
                                                                         <table align="right" border="0"
                                                                             cellpadding="0" cellspacing="0"
                                                                             style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                                                            @if ($viewInBrowserUrl)
-                                                                                <tr>
-                                                                                    <!-- ID:TXT FOOTER VIEW -->
-                                                                                    <td align="center"
-                                                                                        class="MsoNormal"
-                                                                                        style="color:#666666; font-family:Segoe UI, Helvetica Neue, Arial, Verdana, Trebuchet MS, sans-serif; font-size:14px; line-height:24px; letter-spacing:1px;">
-                                                                                        <a href="{{ $viewInBrowserUrl }}"
-                                                                                            style="color:#666666; text-decoration:none;">
-                                                                                            View In Browser
-                                                                                        </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endif
                                                                             <tr>
                                                                                 <td height="2"
                                                                                     style="font-size:0; mso-line-height-rule:exactly; line-height:2px;">
