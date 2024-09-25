@@ -122,6 +122,15 @@
                                     </div>
                                     <div class="row mb-24 gy-3 align-items-center">
                                         <div class="col-12 col-sm-3">
+                                            <label class="form-label mb-0 col-sm-3 w-100">Button text</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="timer" class="form-control"
+                                                placeholder="timer" value="{{ $timer }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-24 gy-3 align-items-center">
+                                        <div class="col-12 col-sm-3">
                                             <label class="form-label mb-0 col-sm-3 w-100">Advertisement Img</label>
                                         </div>
                                         <div class="col-sm-8">

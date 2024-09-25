@@ -19,8 +19,9 @@ class OptionController extends Controller
             'heading',
             'sub_heading',
             'description',
-            'ad_img',  // Image key
-            'btn_text'  // Button text field
+            'ad_img',
+            'btn_text',
+            'timer'
         ])->get()->keyBy('key');
 
         // Extract individual options or set default values if not found
@@ -33,6 +34,7 @@ class OptionController extends Controller
         $sub_heading = $options['sub_heading']->value ?? '';
         $description = $options['description']->value ?? '';
         $btn_text = $options['btn_text']->value ?? '';
+        $timer = $options['timer']->value ?? '';
 
         // Fetch the image URL from the media collection
         $ad_img_url = isset($options['ad_img'])
@@ -48,8 +50,9 @@ class OptionController extends Controller
             'heading',
             'sub_heading',
             'description',
-            'btn_text',  // Pass btn_text to the view
-            'ad_img_url'  // Pass image URL to the view
+            'btn_text',
+            'timer',
+            'ad_img_url',
         ));
     }
 
@@ -63,6 +66,7 @@ class OptionController extends Controller
             'sub_heading' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'btn_text' => 'required|string|max:255',
+            'timer' => 'required|string|max:255',
             'ad_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
         ]);
 
@@ -75,6 +79,7 @@ class OptionController extends Controller
             'sub_heading' => $validated['sub_heading'],
             'description' => $validated['description'],
             'btn_text' => $validated['btn_text'],
+            'timer' => $validated['timer'],
         ];
         foreach ($titles as $key => $value) {
             Option::updateOrCreate(
@@ -136,8 +141,9 @@ class OptionController extends Controller
             'heading',
             'sub_heading',
             'description',
-            'ad_img',  // Image key
-            'btn_text'  // Button text field
+            'ad_img',
+            'btn_text',
+            'timer',
         ])->get()->keyBy('key');
 
         // Extract individual options or set default values if not found
@@ -150,6 +156,7 @@ class OptionController extends Controller
         $sub_heading = $options['sub_heading']->value ?? '';
         $description = $options['description']->value ?? '';
         $btn_text = $options['btn_text']->value ?? '';
+        $timer = $options['timer']->value ?? '';
 
         // Safely check for ad_img and get its media URL
         $ad_img_url = isset($options['ad_img'])
@@ -167,6 +174,7 @@ class OptionController extends Controller
             'sub_heading' => $sub_heading,
             'description' => $description,
             'btn_text' => $btn_text,
+            'timer' => $timer,
             'ad_img_url' => $ad_img_url
         ]);
     }
